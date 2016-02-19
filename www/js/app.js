@@ -32,6 +32,10 @@ angular.module('starter', ['ionic'])
     .state('signup', {
       url: '/signup',
       templateUrl: 'views/signup.html'
+    })
+    .state('intro', {
+      url: '/intro',
+      templateUrl: 'views/intro.html'
     });
-  $urlRouterProvider.otherwise('/signup');
+$urlRouterProvider.otherwise('/intro');
 });
