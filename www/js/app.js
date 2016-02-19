@@ -27,13 +27,11 @@ angular.module('starter', ['ionic'])
     $stateProvider
         .state('login', {
             url: '/login',
-            templateUrl: 'views/login.html',
-            controller: 'LoginController'
+            templateUrl: 'views/login.html'
         })
         .state('signup', {
             url: '/signup',
-            templateUrl: 'views/signup.html',
-            controller: 'SignupController'
+            templateUrl: 'views/signup.html'
         });
     $urlRouterProvider.otherwise('/signup');
 });
