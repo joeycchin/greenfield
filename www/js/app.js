@@ -27,6 +27,7 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth'])
   $stateProvider
     .state('login', {
       url: '/login',
+      controller: 'AuthController',
       templateUrl: 'views/login.html'
     })
     .state('signup', {
@@ -38,5 +39,6 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth'])
       url: '/intro',
       templateUrl: 'views/intro.html'
     });
-$urlRouterProvider.otherwise('/intro');
+
+  $urlRouterProvider.otherwise('/intro');
 });
