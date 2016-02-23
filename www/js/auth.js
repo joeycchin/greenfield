@@ -1,6 +1,6 @@
 angular.module('pug.auth', [])
 
-.controller('AuthController', function ($scope, $window, $location, Auth) {
+.controller('AuthController', function ($scope, $window, $location, Auth, $state) {
   $scope.user = {};
 
   $scope.login = function () {
@@ -9,7 +9,7 @@ angular.module('pug.auth', [])
       console.log(token);
       $window.localStorage.setItem('com.pug', token);
       //should redirect to 'map' route once set up
-      $location.path('/map');
+      $state.go('map');
     })
     .catch(function (error) {
       console.error(error);
@@ -21,7 +21,7 @@ angular.module('pug.auth', [])
     .then(function (token) {
       $window.localStorage.setItem('com.pug', token);
       //should redirect to 'map' route once set up
-      $location.path('/map');
+      $state.go('map');
     })
     .catch(function (error) {
       console.error(error);

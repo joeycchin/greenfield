@@ -1,9 +1,4 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('pug', ['ionic', 'pug.services', 'pug.auth'])
+angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -42,6 +37,11 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth'])
     .state('creatingEvent', {
       url: '/creatingEvent',
       templateUrl: 'views/creatingEvent.html'
+    })
+    .state('map', {
+      url: '/map',
+      controller: 'MapController',
+      templateUrl: 'views/map.html'
     });
   $urlRouterProvider.otherwise('/intro');
 });
