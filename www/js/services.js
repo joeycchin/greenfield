@@ -23,10 +23,21 @@ angular.module('pug.services', [])
       });
     };
 
+    var isAuth = function() {
+      return !!$window.localStorage.getItem('com.pug');
+    };
+
+    var logout = function() {
+      $window.localStorage.removeItem('com.pug');
+      $location.path('/intro');
+    };
+
     // add functions here to return
     return {
       login: login,
-      signup: signup
+      signup: signup,
+      isAuth: isAuth,
+      logout: logout
     };
 
   });

@@ -18,7 +18,7 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
     .state('login', {
       url: '/login',
@@ -36,12 +36,42 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
     })
     .state('creatingEvent', {
       url: '/creatingEvent',
-      templateUrl: 'views/creatingEvent.html'
+      templateUrl: 'views/creatingEvent.html',
+      authenticate: true
     })
     .state('map', {
       url: '/map',
       controller: 'MapController',
-      templateUrl: 'views/map.html'
+      templateUrl: 'views/map.html',
+      authenticate: true
     });
   $urlRouterProvider.otherwise('/intro');
+
+  $httpProvider.interceptors.push('AttachTokens');
+})
+
+.factory('AttachTokens', function ($window) {
+  // Attaches token to any request to server so that server can validate requests 
+  var attach = {
+    request: function (object) {
+      var jwt = $window.localStorage.getItem('com.shortly');
+      if (jwt) {
+        object.headers['x-access-token'] = jwt;
+      }
+      object.headers['Allow-Control-Allow-Origin'] = '*';
+      return object;
+    }
+  };
+  return attach;
+})
+
+.run(function ($rootScope, $state, Auth) {
+  // Check token in localStorage whenever angular state changes
+  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+    if (toState.authenticate && !Auth.isAuth()){
+      // User isn’t authenticated
+      $state.transitionTo("intro");
+      event.preventDefault(); 
+    }
+  });
 });

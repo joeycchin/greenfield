@@ -1,6 +1,6 @@
 angular.module('pug.map', [])
 
-.controller('MapController', function($scope, $ionicLoading, $compile) {
+.controller('MapController', function($scope, $ionicLoading, $compile, Auth) {
   $scope.init = function() {  
     var mapOptions = {
       zoom: 14,
@@ -43,6 +43,11 @@ angular.module('pug.map', [])
   };
 
   $scope.clickTest = function() {
-    alert('Example of infowindow with ng-click')
+    alert('Example of infowindow with ng-click');
   };
+
+  $scope.logout = function() {
+    Auth.logout();
+  };
+
 });
