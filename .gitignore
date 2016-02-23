@@ -5,3 +5,9 @@ node_modules/
 platforms/
 plugins/
 ionic.project
+www/css/ionic.app.css
+www/css/ionic.app.min.css
+www/lib/angular-animate/
+www/lib/angular-sanitize/
+www/lib/angular-ui-router/
+www/lib/angular/

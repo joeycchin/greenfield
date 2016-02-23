@@ -38,7 +38,10 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth'])
     .state('intro', {
       url: '/intro',
       templateUrl: 'views/intro.html'
+    })
+    .state('creatingEvent', {
+      url: '/creatingEvent',
+      templateUrl: 'views/creatingEvent.html'
     });
-
   $urlRouterProvider.otherwise('/intro');
 });
