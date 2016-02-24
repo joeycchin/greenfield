@@ -1,12 +1,8 @@
-angular.module('pug.userEventsService', ['ngRoute'])
+angular.module('pug.userEventsService', [])
 
 .factory('userEventsService', function($http, $location){
-
-  
   // var url = ['http://127.0.0.1:3000/api/users/', userId, '/event'].join();
-
   var getUserEvents = function(){
-
     return $http({
       method : 'GET',
       url : 'http://127.0.0.1:3000/api/users/1/event'
@@ -15,13 +11,9 @@ angular.module('pug.userEventsService', ['ngRoute'])
       console.log('>>>>',resp);
       return resp.data;
     });
-    
   };
-
-
 
   return {
     getUserEvents : getUserEvents
   };
-  
 });

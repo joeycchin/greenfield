@@ -34,8 +34,8 @@ angular.module('pug.auth', [])
   };
 
   $scope.showAlert = function(errMsg) {
-   var alertPopup = $ionicPopup.alert({
-     template: errMsg
-   });
+    var alertPopup = $ionicPopup.alert({
+      template: errMsg
+    });
   };
 });
