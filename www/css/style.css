@@ -1,4 +1,8 @@
 /* Empty. Add your own CSS if you like */
+.map-container {
+  bottom: 50px;
+}
+
 .scroll {
     height: 100%;
 }
