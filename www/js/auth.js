@@ -12,6 +12,9 @@ angular.module('pug.auth', [])
     })
     .catch(function (error) {
       console.error(error);
+
+      var errMsg = 'Incorrect password or email';
+      $scope.showAlert(errMsg);
     });
   };
 
@@ -25,12 +28,14 @@ angular.module('pug.auth', [])
     .catch(function (error) {
       console.error(error);
 
-      $scope.showAlert = function() {
-       var alertPopup = $ionicPopup.alert({
-         template: 'Sorry about that. It looks like we already have the entered email on our records.'
-       });
-      };
-      $scope.showAlert();
+      var errMsg = 'Sorry about that. It looks like we already have the entered email on our records.';
+      $scope.showAlert(errMsg);
     });
+  };
+
+  $scope.showAlert = function(errMsg) {
+   var alertPopup = $ionicPopup.alert({
+     template: errMsg
+   });
   };
 });
