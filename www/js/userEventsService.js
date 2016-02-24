@@ -1,5 +1,4 @@
 angular.module('pug.userEventsService', [])
-
 .factory('userEventsService', function($http, $location){
   // var url = ['http://127.0.0.1:3000/api/users/', userId, '/event'].join();
   var getUserEvents = function(){

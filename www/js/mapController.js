@@ -9,8 +9,7 @@ angular.module('pug.map', [])
     {type: 'tennis', latitude: 37.791066, longitude: -122.407297}
   ];
 
-  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
- 
+  $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
     var loc = Auth.get() || [position.coords.latitude, position.coords.longitude];
     var centerLatLng = new google.maps.LatLng(loc[0], loc[1]);
     
@@ -22,6 +21,7 @@ angular.module('pug.map', [])
  
     // Create new map with mapOptions specified
     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
     var infoWindow = new google.maps.InfoWindow();
     var marker;
 
@@ -51,7 +51,6 @@ angular.module('pug.map', [])
   $scope.logout = function() {
     Auth.logout();
   };
-
 });
 
 

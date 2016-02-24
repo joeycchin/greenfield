@@ -1,5 +1,4 @@
 angular.module('pug.auth', [])
-
 .controller('AuthController', function ($scope, $window, $location, Auth, $state, $ionicPopup) {
   $scope.user = {};
 
