@@ -1,4 +1,4 @@
-angular.module('pug.creatingEvent', ['pug.services'])
+angular.module('creatingEvent', ['pug.services'])
   .controller('creatingEventCtrl', function (Auth, $scope, $http, $location, $window) {
     $scope.createdEvent = {};
 
