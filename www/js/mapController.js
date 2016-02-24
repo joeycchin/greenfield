@@ -16,7 +16,10 @@ angular.module('pug.map', [])
     var mapOptions = {
       center: centerLatLng,
       zoom: 14,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoomControl: false,
+      mapTypeControl: false,
+      streetViewControl: false
     };
  
     // Create new map with mapOptions specified
