@@ -6,13 +6,14 @@ angular.module('pug.userEventsService', ['ngRoute'])
   // var url = ['http://127.0.0.1:3000/api/users/', userId, '/event'].join();
 
   var getUserEvents = function(){
-  
+
     return $http({
       method : 'GET',
-      url : 'http://127.0.0.1:3000/api/users/:id/events'
+      url : 'http://127.0.0.1:3000/api/users/1/event'
     })
     .then(function(resp){
-      return resp;
+      console.log('>>>>',resp);
+      return resp.data;
     });
     
   };
