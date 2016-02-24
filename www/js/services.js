@@ -40,14 +40,14 @@ angular.module('pug.services', [])
       })
     }
 
-    var evnetLatLng;
+    var eventLatLng;
 
     var set = function (createdEvent) {
-      evnetLatLng = [createdEvent.latitude, createdEvent.longitude];
+      eventLatLng = [createdEvent.latitude, createdEvent.longitude];
     }
 
     var get = function () {
-      return evnetLatLng;
+      return eventLatLng;
     }
 
     // add functions here to return

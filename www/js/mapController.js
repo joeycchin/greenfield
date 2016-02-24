@@ -20,7 +20,7 @@ angular.module('pug.map', [])
       var marker = new google.maps.Marker({
         map: $scope.map,
         animation: google.maps.Animation.DROP,
-        position: eventLoc //
+        position: eventLoc
       });      
      
       var infoWindow = new google.maps.InfoWindow({
