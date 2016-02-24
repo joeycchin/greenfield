@@ -1,12 +1,5 @@
-angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map', 'creatingEvent', 'ngCordova'])
-// Ionic Starter App
+angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.userEventsService', 'pug.userEventsController', 'ngRoute', 'pug.map', 'creatingEvent', 'ngCordova'])
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -52,7 +45,13 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map', 'creating
       controller: 'MapController',
       templateUrl: 'views/map.html',
       authenticate: true
+    })
+    .state('userEvents', {
+      url : '/userEvents',
+      controller : 'userEventsController',
+      templateUrl : 'views/userEvents.html'
     });
+
   $urlRouterProvider.otherwise('/intro');
 
   $httpProvider.interceptors.push('AttachTokens');
