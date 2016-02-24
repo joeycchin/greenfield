@@ -40,13 +40,25 @@ angular.module('pug.services', [])
       })
     }
 
+    var eventLatLng;
+
+    var set = function (createdEvent) {
+      eventLatLng = [createdEvent.latitude, createdEvent.longitude];
+    }
+
+    var get = function () {
+      return eventLatLng;
+    }
+
     // add functions here to return
     return {
       login: login,
       signup: signup,
       isAuth: isAuth,
       logout: logout,
-      addEvent: addEvent
+      addEvent: addEvent,
+      set: set,
+      get: get
     };
 
   });

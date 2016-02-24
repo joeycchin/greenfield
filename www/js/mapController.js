@@ -3,11 +3,12 @@ angular.module('pug.map', [])
   var options = {timeout: 10000, enableHighAccuracy: true};
 
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
- 
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    
+    var loc = Auth.get() || [position.coords.latitude, position.coords.longitude];
+    var eventLoc = new google.maps.LatLng(loc[0], loc[1]);
 
     var mapOptions = {
-      center: latLng,
+      center: eventLoc,
       zoom: 14,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -19,7 +20,7 @@ angular.module('pug.map', [])
       var marker = new google.maps.Marker({
         map: $scope.map,
         animation: google.maps.Animation.DROP,
-        position: latLng
+        position: eventLoc
       });      
      
       var infoWindow = new google.maps.InfoWindow({

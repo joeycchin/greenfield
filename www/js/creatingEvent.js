@@ -1,12 +1,17 @@
 angular.module('creatingEvent', ['pug.services'])
-  .controller('creatingEventCtrl', function (Auth, $scope, $http, $location, $window) {
+  .controller('creatingEventCtrl', function (Auth, $scope, $http, $location, $window, $state, $ionicHistory) {
     $scope.createdEvent = {};
 
     $scope.addEvent = function () {
       Auth.addEvent($scope.createdEvent)
       .then(function () {
         //will not redirect to map view, waiting on user token information
-        $location.path('/map');
+        Auth.set($scope.createdEvent);
+        //$location.path('/map');
+        $ionicHistory.clearCache()
+        .then(function (){ 
+          $state.go('map', {}, {reload: true})
+        }) 
       })
     }
 
