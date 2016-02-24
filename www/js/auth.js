@@ -6,7 +6,6 @@ angular.module('pug.auth', [])
   $scope.login = function () {
     Auth.login($scope.user)
     .then(function (token) {
-      console.log(token);
       $window.localStorage.setItem('com.pug', token);
       //should redirect to 'map' route once set up
       $state.go('map');
@@ -27,4 +26,5 @@ angular.module('pug.auth', [])
       console.error(error);
     });
   };
+
 });
