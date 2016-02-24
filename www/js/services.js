@@ -60,5 +60,4 @@ angular.module('pug.services', [])
       set: set,
       get: get
     };
-
   });
