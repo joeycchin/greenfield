@@ -62,7 +62,7 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map', 'creating
   // Attaches token to any request to server so that server can validate requests 
   var attach = {
     request: function (object) {
-      var jwt = $window.localStorage.getItem('com.shortly');
+      var jwt = $window.localStorage.getItem('com.pug');
       if (jwt) {
         object.headers['x-access-token'] = jwt;
       }
