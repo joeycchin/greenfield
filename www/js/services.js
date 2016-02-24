@@ -38,11 +38,6 @@ angular.module('pug.services', [])
         url: 'http://127.0.0.1:3000/api/events',
         data: createdEvent
       })
-      .then(function (data) {
-        //option 1) render a event successfully created page
-        //option 2) redirect to user's event listing page
-        return data;
-      })
     }
 
     // add functions here to return
