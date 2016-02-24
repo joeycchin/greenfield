@@ -32,12 +32,21 @@ angular.module('pug.services', [])
       $location.path('/intro');
     };
 
+    var addEvent = function (createdEvent) {
+      return $http({
+        method: 'POST',
+        url: 'http://127.0.0.1:3000/api/events',
+        data: createdEvent
+      })
+    }
+
     // add functions here to return
     return {
       login: login,
       signup: signup,
       isAuth: isAuth,
-      logout: logout
+      logout: logout,
+      addEvent: addEvent
     };
 
   });

@@ -1,4 +1,4 @@
-angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
+angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.userEventsService', 'pug.userEventsController', 'ngRoute', 'pug.map', 'creatingEvent', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -36,6 +36,7 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
     })
     .state('creatingEvent', {
       url: '/creatingEvent',
+      controller: 'creatingEventCtrl',
       templateUrl: 'views/creatingEvent.html',
       authenticate: true
     })
@@ -44,7 +45,13 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
       controller: 'MapController',
       templateUrl: 'views/map.html',
       authenticate: true
+    })
+    .state('userEvents', {
+      url : '/userEvents',
+      controller : 'userEventsController',
+      templateUrl : 'views/userEvents.html'
     });
+
   $urlRouterProvider.otherwise('/intro');
 
   $httpProvider.interceptors.push('AttachTokens');
@@ -54,7 +61,7 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
   // Attaches token to any request to server so that server can validate requests 
   var attach = {
     request: function (object) {
-      var jwt = $window.localStorage.getItem('com.shortly');
+      var jwt = $window.localStorage.getItem('com.pug');
       if (jwt) {
         object.headers['x-access-token'] = jwt;
       }
