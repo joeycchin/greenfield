@@ -21,7 +21,7 @@ angular.module('pug.map', [])
         map: $scope.map,
         animation: google.maps.Animation.DROP,
         position: eventLoc
-      });      
+      });
      
       var infoWindow = new google.maps.InfoWindow({
         content: "Here I am!"
@@ -38,4 +38,9 @@ angular.module('pug.map', [])
   $scope.logout = function() {
     Auth.logout();
   };
+
 });
+
+
+
+
