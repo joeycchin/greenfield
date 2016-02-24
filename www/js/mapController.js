@@ -20,13 +20,8 @@ angular.module('pug.map', [])
       var marker = new google.maps.Marker({
         map: $scope.map,
         animation: google.maps.Animation.DROP,
-<<<<<<< a0f6716be9f6dd3e17af6b55672d252063dc5571
         position: eventLoc
-      });      
-=======
-        position: latLng
       });
->>>>>>> getUserEvents
      
       var infoWindow = new google.maps.InfoWindow({
         content: "Here I am!"
