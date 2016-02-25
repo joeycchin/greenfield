@@ -60,8 +60,10 @@ angular.module('pug.map', [])
     for (var i = 0; i < markers.length; i++) {
       if(!markers[i].eventType.includes($scope.filter)) {
         markers[i].setMap(null);
-      } else if ($scope.filter === '') {
-        markers[i].setMap($scope.map);
+      } else if (markers[i].eventType.includes($scope.filter) || $scope.filter === '') {
+        if (markers[i].map === null) {
+          markers[i].setMap($scope.map);
+        }
       }
     }
   }
@@ -70,3 +72,4 @@ angular.module('pug.map', [])
     Auth.logout();
   };
 });
+
