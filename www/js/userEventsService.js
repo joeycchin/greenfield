@@ -42,10 +42,20 @@ angular.module('pug.userEventsService', [])
       return resp.data;
     });
   };
+ 
+  var removeUserEvent = function(eventId){
+    return $http({
+      method : 'DELETE',
+      url : 'http://127.0.0.1:3000/api/events/users/1',
+      data : {eventId : eventId},
+      headers: {"Content-Type": "application/json;charset=utf-8"}
+    });
+  };
 
   return {
     getUserEvents : getUserEvents,
     getAllEvents: getAllEvents,
-    getEvent : getEvent
+    getEvent : getEvent,
+    removeUserEvent : removeUserEvent
   };
 });
