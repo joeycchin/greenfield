@@ -20,7 +20,6 @@ angular.module('pug.userEventsController', ['pug.userEventsService'])
        userEventsService.removeUserEvent(eventId);
        
       for(var i = 0; i < $scope.userEvents.length; i++){
-      	console.log($scope.userEvents)
         if($scope.userEvents[i].data._id === eventId){
        	  $scope.userEvents.splice(i,1);
         }

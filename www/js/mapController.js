@@ -1,5 +1,5 @@
 angular.module('pug.map', [])
-.controller('MapController', function($scope, $ionicLoading, $compile, $cordovaGeolocation, Auth, userEventsService) {
+.controller('MapController', function($scope, $ionicLoading, $compile, $cordovaGeolocation, Auth, userEventsService, $ionicPopup) {
   var options = {timeout: 10000, enableHighAccuracy: true};
   var markers = [];
   $scope.events;
@@ -48,8 +48,18 @@ angular.module('pug.map', [])
     // Sets text that popups when marker is clicked
     google.maps.event.addListener(marker, 'click', (function(marker) {
         return function() {
-          infoWindow.setContent(event.type);
+          // Button for adding event
+          infoWindow.setContent('<span id='+ event._id + '>Add Event</span>');
           infoWindow.open($scope.map, marker);
+          var contentBox = document.getElementById(event._id);
+          contentBox.addEventListener("click", function() {
+            userEventsService.checkInUser(event._id)
+            .then(function() {
+              $ionicPopup.alert({
+                title: 'Event added!'
+              });
+            });
+          }, false);
         };
     })(marker));
 
@@ -66,7 +76,7 @@ angular.module('pug.map', [])
         }
       }
     }
-  }
+  };
 
   $scope.logout = function() {
     Auth.logout();
