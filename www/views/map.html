@@ -1,13 +1,13 @@
 <ion-view cache-view='false' data-ng-init="init()" name="map-view" title="Map">
-  <div class="list list-inset map-search">
-    <label class="item item-input">
-      <i class="icon ion-search placeholder-icon"></i>
-      <input type="text" placeholder="Search by sports type" ng-model="filter" ng-change="filterEvents()">
-    </label>
-  </div>
-
-  <ion-content class="map-container">
-    <div id="map" data-tap-disabled="true"></div>
+  <ion-content scroll="false" class="map-container">
+    <map on-create="mapCreated(map)">
+      <div class="list list-inset map-search">
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Search by sports type" ng-model="filter" ng-change="filterEvents()">
+        </label>
+      </div>
+    </map>
   </ion-content>
 </ion-view>
 
