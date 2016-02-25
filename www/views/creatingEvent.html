@@ -11,16 +11,33 @@
       <label class="item item-input">
         <input type="text" placeholder="address" ng-model="createdEvent.location">
       </label>
+
       <label class="item item-input">
-        <input type="text" placeholder="Starting time" ng-model="createdEvent.startTime">
+      <div>
+      <ionic-timepicker input-obj="startTime">
+        <button class="button button-clear overflowShow" style='font-size: 14px; padding: 0px'>
+          <standard-time-meridian etime='timePickerObject.inputEpochTime'>Start time</standard-time-meridian>
+        </button>
+      </ionic-timepicker>
+      </div>
       </label>
+
       <label class="item item-input">
-        <input type="text" placeholder="Ending time" ng-model="createdEvent.endTime">
+
+      <div>
+      <ionic-timepicker input-obj="timePickerObject">
+        <button class="button button-clear button-stable overflowShow button-fake">
+          <standard-time-meridian etime='timePickerObject.inputEpochTime'>End time</standard-time-meridian>
+        </button>
+      </ionic-timepicker>
+      </div>
       </label>
+
       <label class="item item-input">
         <input type="text" placeholder="Skill level" ng-model="createEvent.skillLevel">
       </label>
     </div>
+
     <button class="button button-block button-calm" ng-click="searchAddress()">Create this event</button>
   </ion-content>
 </ion-view>
