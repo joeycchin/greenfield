@@ -2,8 +2,8 @@ angular.module('creatingEvent', ['pug.services'])
 .controller('creatingEventCtrl', function (Auth, $scope, $http, $location, $window, $state, $ionicHistory) {
   $scope.createdEvent = {};
   $scope.loc = [];
-  $scope.showStartTime = true;
-  $scope.showEndTime = true;
+  $scope.showStartTime = false;
+  $scope.showEndTime = false;
 
   $scope.addEvent = function () {
     Auth.addEvent($scope.createdEvent)
