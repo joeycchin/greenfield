@@ -1,4 +1,4 @@
-angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.userEventsService', 'pug.userEventsController', 'pug.map', 'creatingEvent', 'ngCordova'])
+angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.userEventsService', 'pug.userEventsController', 'pug.map', 'creatingEvent', 'ngCordova', 'ionic-timepicker'])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
     .state('login', {
