@@ -45,7 +45,8 @@ angular.module('creatingEvent', ['pug.services'])
       today.setUTCSeconds(0);
       $scope.showStartTime = true;
       $scope.createdEvent.startTime = today;
-      $scope.displayStartTime = ' is set to ' + today.toISOString().slice(11,16);
+      var space = ' ';
+      $scope.displayStartTime = space + ' is set to ' + today.toISOString().slice(11,16);
 
     }
   }
@@ -62,7 +63,8 @@ angular.module('creatingEvent', ['pug.services'])
       today.setUTCSeconds(0);
       $scope.showEndTime = true;
       $scope.createdEvent.endTime = today;
-      $scope.displayEndTime = ' is set to ' + today.toISOString().slice(11,16);
+      var space = ' ';
+      $scope.displayEndTime = space + ' is set to ' + today.toISOString().slice(11,16);
     }
   }
 
