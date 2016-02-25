@@ -2,6 +2,8 @@ angular.module('creatingEvent', ['pug.services'])
 .controller('creatingEventCtrl', function (Auth, $scope, $http, $location, $window, $state, $ionicHistory) {
   $scope.createdEvent = {};
   $scope.loc = [];
+  $scope.showStartTime = false;
+  $scope.showEndTime = false;
 
   $scope.addEvent = function () {
     Auth.addEvent($scope.createdEvent)
@@ -41,8 +43,11 @@ angular.module('creatingEvent', ['pug.services'])
       today.setUTCHours(hour);
       today.setUTCMinutes(minute);
       today.setUTCSeconds(0);
-
+      $scope.showStartTime = true;
       $scope.createdEvent.startTime = today;
+      var space = ' ';
+      $scope.displayStartTime = space + ' is set to ' + today.toISOString().slice(11,16);
+
     }
   }
 
@@ -56,7 +61,10 @@ angular.module('creatingEvent', ['pug.services'])
       today.setUTCHours(hour);
       today.setUTCMinutes(minute);
       today.setUTCSeconds(0);
+      $scope.showEndTime = true;
       $scope.createdEvent.endTime = today;
+      var space = ' ';
+      $scope.displayEndTime = space + ' is set to ' + today.toISOString().slice(11,16);
     }
   }
 
