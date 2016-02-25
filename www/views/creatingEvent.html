@@ -6,17 +6,17 @@
   <ion-content class="padding">
     <div class="list list-inset">
       <label class="item item-input">
-        <input type="text" placeholder="type of sport" ng-model="createdEvent.type">
+        <input type="text" placeholder="Type of Sport" ng-model="createdEvent.type">
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="address" ng-model="createdEvent.location">
+        <input type="text" placeholder="Address" ng-model="createdEvent.location">
       </label>
 
       <label class="item item-input">
       <div>
       <ionic-timepicker input-obj="startTime">
-        <button class="button button-clear overflowShow" style='font-size: 14px; padding: 0px'>
-          <standard-time-meridian etime='timePickerObject.inputEpochTime'>Start time</standard-time-meridian>
+        <button class="button button-clear overflowShow" style='font-size: 14px; min-height:30px; height: 34px; padding: 0 0; margin: 0 0; line-height: 16px; padding-top: 2px;'>
+          <standard-time-meridian etime='timePickerObject.inputEpochTime'>Starting Time</standard-time-meridian><span ng-show='showStartTime' style='float:right'>{{displayStartTime}}</span>
         </button>
       </ionic-timepicker>
       </div>
@@ -26,8 +26,8 @@
 
       <div>
       <ionic-timepicker input-obj="timePickerObject">
-        <button class="button button-clear button-stable overflowShow button-fake">
-          <standard-time-meridian etime='timePickerObject.inputEpochTime'>End time</standard-time-meridian>
+        <button class="button button-clear overflowShow" style='font-size: 14px; min-height:30px; height: 34px; padding: 0 0; margin: 0 0; line-height: 16px; padding-top: 2px;'>
+          <standard-time-meridian etime='timePickerObject.inputEpochTime'>Ending Time</standard-time-meridian><span ng-show='showEndTime' style='float:right'>{{displayEndTime}}</span>
         </button>
       </ionic-timepicker>
       </div>
