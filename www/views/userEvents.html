@@ -1,5 +1,22 @@
 <ion-view name="user-events">
-  <div ng-repeat="event in userEvents">
-  	{{event}}
-  </div>
+  
+  <ion-list>
+	  <ion-item ng-repeat="event in userEvents" class="list list-inset">
+	  	<div>
+	  		{{event.data.type}}
+	  	</div>
+	  	<div>
+	  		{{event.data.skillLevel}}
+	  	</div>
+	  	<div>
+	  		{{event.data.startTime}}
+	  	</div>
+	  	<div>
+	  		{{event.data.location}}
+	  	</div>
+	  	<button class=" userEventsButtons button icon ion-close"
+      ng-click="showConfirm(event.data._id)">
+	  	</button>
+	  </ion-item>
+	</ion-list>
 </ion-view>

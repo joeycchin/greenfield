@@ -1,4 +1,32 @@
 angular.module('pug.userEventsController', ['pug.userEventsService'])
-.controller('userEventsController', function($scope, userEventsService){
-  $scope.userEvents = userEventsService.getUserEvents();
+.controller('userEventsController', function($scope, userEventsService, $ionicPopup){
+  $scope.userEvents = [];
+
+  userEventsService.getUserEvents()
+  .then(function(resp){
+  	$scope.userEvents = resp;
+  });
+
+
+ $scope.showConfirm = function(eventId) {
+   var confirmPopup = $ionicPopup.confirm({
+     title: 'Checkout of Event',
+     template: 'Are you sure you want to checkout of this event?'
+   });
+
+
+   confirmPopup.then(function(yes) {
+     if(yes) {
+       userEventsService.removeUserEvent(eventId);
+       
+      for(var i = 0; i < $scope.userEvents.length; i++){
+      	console.log($scope.userEvents)
+        if($scope.userEvents[i].data._id === eventId){
+       	  $scope.userEvents.splice(i,1);
+        }
+      }
+     }
+   });
+ };
+
 });
