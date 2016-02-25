@@ -42,6 +42,14 @@ angular.module('pug.userEventsService', [])
       return resp.data;
     });
   };
+
+  var checkInUser = function(eventId) {
+    return $http({
+      method: 'POST',
+      url: 'http://127.0.0.1:3000/api/events/users/1',
+      data : {eventId : eventId}
+    });
+  };
  
   var removeUserEvent = function(eventId){
     return $http({
@@ -56,6 +64,7 @@ angular.module('pug.userEventsService', [])
     getUserEvents : getUserEvents,
     getAllEvents: getAllEvents,
     getEvent : getEvent,
+    checkInUser: checkInUser,
     removeUserEvent : removeUserEvent
   };
 });
