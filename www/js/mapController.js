@@ -55,7 +55,7 @@ angular.module('pug.map', [])
           var eventTypeArr = ["<div class='important'>", event.type ,"</div>"].join('');
           var playerCountArr = ["<div class='important'>", event.playerCount, " " , plural, "</div>"].join('');
           var eventStartTimeArr = ["<div class='notImportant'>", formattedDateTime ,"</div>"].join('');
-          var locationArr = ["<div class='notImportant'>", event.location ,"</div>"].join('');          
+          var locationArr = ["<div class='notImportant'>", event.location ,"</div>"].join('');
           var skillLevelArr = ["<div class='notImportant'>", event.skillLevel ,"</div>"].join('');
 
           var allInfoArr = [eventTypeArr, playerCountArr, eventStartTimeArr, locationArr, skillLevelArr].join('');
@@ -114,7 +114,6 @@ function format(startTime){
   date.push(formattedTime);
 
   return date.join(' ');  
-  // var formattedDateTime = formattedDate.concat([formattedTime]).join(' ');
 };
 
 
