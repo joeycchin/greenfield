@@ -63,11 +63,23 @@ angular.module('pug.map', [])
           infoWindow.open($scope.map, marker);
           var contentBox = document.getElementById(event._id);
           contentBox.addEventListener("click", function() {
-            userEventsService.checkInUser(event._id)
-            .then(function() {
-              $ionicPopup.alert({
-                title: 'Event added!'
-              });
+            userEventsService.getUserEventIds()
+            .then(function(eventIds) {
+              var eventId = event._id;
+
+              if (!eventIds.includes(eventId)) {
+                userEventsService.checkInUser(eventId)
+                .then(function() {
+                  $ionicPopup.alert({
+                    title: 'Event added!'
+                  });
+                });  
+              } else {
+                $ionicPopup.alert({
+                  title: 'Event already added!'
+                });
+              }
+
             });
           }, false);
         };

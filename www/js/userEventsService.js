@@ -8,14 +8,21 @@ angular.module('pug.userEventsService', [])
       url : 'http://127.0.0.1:3000/api/events/' +eventId
     });
   };
-  
-  var getUserEvents = function(){
+
+  var getUserEventIds = function() {
     return $http({
       method : 'GET',
       url : 'http://127.0.0.1:3000/api/users/1/event'
     })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+  
+  var getUserEvents = function(){
+    return getUserEventIds()
     .then(function(resp){
-      var eventIds = resp.data;
+      var eventIds = resp;
       var events = [];
 
       for(var i = 0; i < eventIds.length; i++){
@@ -28,7 +35,6 @@ angular.module('pug.userEventsService', [])
           console.error(err);
         });
       }
-
       return events;
     });
   };
@@ -61,6 +67,7 @@ angular.module('pug.userEventsService', [])
   };
 
   return {
+    getUserEventIds: getUserEventIds,
     getUserEvents : getUserEvents,
     getAllEvents: getAllEvents,
     getEvent : getEvent,
