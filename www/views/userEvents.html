@@ -1,24 +1,30 @@
 <ion-view name="user-events">
-  <button ui-sref="map">
-  	Back
-  </button>
-  <ion-list>
-	  <ion-item ng-repeat="event in userEvents" class="list list-inset">
-	  	<div>
-	  		{{event.data.type}}
-	  	</div>
-	  	<div>
-	  		{{event.data.skillLevel}}
-	  	</div>
-	  	<div>
-	  		{{format(event.data.startTime)}}
-	  	</div>
-	  	<div>
-	  		{{event.data.location}}
-	  	</div>
-	  	<button class=" userEventsButtons button icon ion-close"
-      ng-click="showConfirm(event.data._id)">
-	  	</button>
-	  </ion-item>
-	</ion-list>
+
+	<ion-nav-bar class="bar-positive">
+	  <ion-nav-back-button class="button-clear">
+	    <i class="ion-arrow-left-c"></i> Back
+	  </ion-nav-back-button>
+	</ion-nav-bar>
+  
+  <ion-content class="padding">
+	  <ion-list>
+		  <ion-item ng-repeat="event in userEvents" class="list list-inset">
+		  	<div class="">
+		  		{{event.data.type}}
+		  	</div>
+		  	<div>
+		  		{{event.data.skillLevel}}
+		  	</div>
+		  	<div>
+		  		{{format(event.data.startTime)}}
+		  	</div>
+		  	<div>
+		  		{{event.data.location}}
+		  	</div>
+		  	<button class=" userEventsButtons button icon ion-close "
+	      ng-click="showConfirm(event.data._id)">
+		  	</button>
+		  </ion-item>
+		</ion-list>
+	</ion-content>
 </ion-view>

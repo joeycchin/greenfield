@@ -15,6 +15,7 @@
 .userEventsButtons{
 	color : red;
 	float :right;
+	background-color: white;
 }
 
 .eventInfo{
