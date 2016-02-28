@@ -57,17 +57,31 @@ angular.module('pug.map', [])
           var eventStartTimeArr = ["<div class='notImportant'>", formattedDateTime ,"</div>"].join('');
           var locationArr = ["<div class='notImportant'>", event.location ,"</div>"].join('');
           var skillLevelArr = ["<div class='notImportant'>", event.skillLevel ,"</div>"].join('');
+          var addEvent = ['<span id='+ event._id + '>Add Event</span>'].join('');
 
-          var allInfoArr = [eventTypeArr, playerCountArr, eventStartTimeArr, locationArr, skillLevelArr].join('');
+          var allInfoArr = [eventTypeArr, playerCountArr, eventStartTimeArr, locationArr, skillLevelArr, addEvent].join('');
           infoWindow.setContent("<div class='container'>" + allInfoArr + "</div>");
           infoWindow.open($scope.map, marker);
+
           var contentBox = document.getElementById(event._id);
           contentBox.addEventListener("click", function() {
-            userEventsService.checkInUser(event._id)
-            .then(function() {
-              $ionicPopup.alert({
-                title: 'Event added!'
-              });
+            userEventsService.getUserEventIds()
+            .then(function(eventIds) {
+              var eventId = event._id;
+
+              if (!eventIds.includes(eventId)) {
+                userEventsService.checkInUser(eventId)
+                .then(function() {
+                  $ionicPopup.alert({
+                    title: 'Event added!'
+                  });
+                });  
+              } else {
+                $ionicPopup.alert({
+                  title: 'Event already added!'
+                });
+              }
+
             });
           }, false);
         };
