@@ -7,7 +7,7 @@ angular.module('pug.auth', [])
     .then(function (token) {
       $window.localStorage.setItem('com.pug', token);
       //should redirect to 'map' route once set up
-      $state.go('map');
+      $state.go('tabs');
     })
     .catch(function (error) {
       console.error(error);
@@ -22,7 +22,7 @@ angular.module('pug.auth', [])
     .then(function (token) {
       $window.localStorage.setItem('com.pug', token);
       //should redirect to 'map' route once set up
-      $state.go('map');
+      $state.go('tabs');
     })
     .catch(function (error) {
       console.error(error);
@@ -36,5 +36,9 @@ angular.module('pug.auth', [])
     var alertPopup = $ionicPopup.alert({
       template: errMsg
     });
+  };
+
+  $scope.logout = function() {
+    Auth.logout();
   };
 });

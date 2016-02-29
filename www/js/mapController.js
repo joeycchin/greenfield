@@ -127,10 +127,6 @@ angular.module('pug.map', [])
       }
     }
   };
-
-  $scope.logout = function() {
-    Auth.logout();
-  };
 });
 
 
