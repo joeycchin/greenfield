@@ -73,6 +73,7 @@ angular.module('creatingEvent', [])
 
   $scope.startTime = {
     inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
+    step : 1,
     format: 12,
     callback: function (val) {
       startTimePickerCallback(val);
@@ -81,6 +82,7 @@ angular.module('creatingEvent', [])
 
   $scope.timePickerObject = {
     inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
+    step : 1,
     format: 12,
     callback: function (val) {
       endTimePickerCallback(val);
