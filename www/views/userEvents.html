@@ -6,9 +6,9 @@
 	  </ion-nav-back-button>
 	</ion-nav-bar>
   
-  <ion-content class="padding">
+  <ion-content>
 	  <ion-list>
-		  <ion-item ng-repeat="event in userEvents" class="list list-inset">
+		  <ion-item ng-repeat="event in userEvents">
 		  	<div class="eventType">
 		  		{{event.data.type}} - {{event.data.skillLevel}}
 		  	</div>
@@ -18,7 +18,7 @@
 		  	<div class="eventLocation">
 		  		{{event.data.location}}
 		  	</div>
-		  	<button class=" userEventsButtons button icon ion-close "
+		  	<button class="userEventsButtons button icon ion-close"
 	      ng-click="showConfirm(event.data._id)">
 		  	</button>
 		  </ion-item>
