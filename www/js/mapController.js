@@ -1,5 +1,5 @@
-angular.module('pug.map', [])
-.controller('MapController', function($scope, $ionicLoading, $compile, $cordovaGeolocation, Auth, userEventsService, $ionicPopup) {
+angular.module('pug.map', ['pug.timeFormatService'])
+.controller('MapController', function($scope, $ionicLoading, $compile, $cordovaGeolocation, Auth, userEventsService, $ionicPopup, timeFormatService) {
   var options = {timeout: 10000, enableHighAccuracy: true};
   var markers = [];
   $scope.events;
@@ -57,7 +57,7 @@ angular.module('pug.map', [])
     google.maps.event.addListener(marker, 'click', (function(marker) {
         return function() {
   
-          var formattedDateTime = format(event.startTime);
+          var formattedDateTime = timeFormatService.formatTime(event.startTime);
           var plural = (event.playerCount > 1) ? "players" : "player";
           
           var eventTypeArr = ["<div class='important'>", event.type ,"</div>"].join('');
@@ -146,36 +146,3 @@ angular.module('pug.map', [])
     updateMap();
   });
 });
-
-
-function format(startTime){
-  var start = new Date(startTime);
-  var date = start.toString().split(' ').slice(0,3);
-  var time = start.toString().split(' ')[4];
-  var formattedTime = time.split(':');
-  var hours = Number(formattedTime[0]);
-  var minutes = formattedTime[1];
-  var append;
-
-  if(hours > 12){
-    hours-=12;
-    append = 'PM';
-  } else {
-    append = 'AM';
-  }
-
-  formattedTime = [hours, minutes].join(':') + ' ' + append;
-  date.push(formattedTime);
-
-  return date.join(' ');  
-};
-
-
-
-
-
-
-
-
-
-

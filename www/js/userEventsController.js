@@ -1,5 +1,5 @@
-angular.module('pug.userEventsController', ['pug.userEventsService'])
-.controller('userEventsController', function($scope, userEventsService, $ionicPopup){
+angular.module('pug.userEventsController', ['pug.userEventsService', 'pug.timeFormatService'])
+.controller('userEventsController', function($scope, userEventsService, $ionicPopup, timeFormatService){
   $scope.userEvents = [];
 
   userEventsService.getUserEvents()
@@ -28,27 +28,8 @@ angular.module('pug.userEventsController', ['pug.userEventsService'])
    });
  };
 
-  $scope.format = function (startTime){
-    var start = new Date(startTime);
-    var date = start.toString().split(' ').slice(0,3);
-    var time = start.toString().split(' ')[4];
-    var formattedTime = time.split(':');
-    var hours = Number(formattedTime[0]);
-    var minutes = formattedTime[1];
-    var append;
+  $scope.format = timeFormatService.formatTime;
 
-    if(hours > 12){
-      hours-=12;
-      append = 'PM';
-    } else {
-      append = 'AM';
-    }
-
-    formattedTime = [hours, minutes].join(':') + ' ' + append;
-    date.push(formattedTime);
-
-    return date.join(' ');  
-  };
 });
 
 

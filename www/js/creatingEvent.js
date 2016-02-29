@@ -1,5 +1,5 @@
-angular.module('creatingEvent', ['pug.services'])
-.controller('creatingEventCtrl', function (Auth, $scope, $http, $location, $window, $state, $ionicHistory) {
+angular.module('creatingEvent', ['pug.services', 'pug.timeFormatService'])
+.controller('creatingEventCtrl', function (Auth, $scope, $http, $location, $window, $state, $ionicHistory, timeFormatService) {
   $scope.createdEvent = {};
   $scope.loc = [];
   $scope.showStartTime = false;
@@ -11,32 +11,10 @@ angular.module('creatingEvent', ['pug.services'])
       Auth.set($scope.createdEvent);
       $ionicHistory.clearCache()
       .then(function (){ 
-        $state.go('map', {}, {reload: true})
+        $state.go('tabs.map', {}, {reload: true})
       }) 
     })
   }
-
-  function format(startTime){
-    var start = new Date(startTime);
-    var date = start.toString().split(' ').slice(0,3);
-    var time = start.toString().split(' ')[4];
-    var formattedTime = time.split(':');
-    var hours = Number(formattedTime[0]);
-    var minutes = formattedTime[1];
-    var append;
-
-    if(hours > 12){
-      hours-=12;
-      append = 'PM';
-    } else {
-      append = 'AM';
-    }
-
-    formattedTime = [hours, minutes].join(':') + ' ' + append;
-    date.push(formattedTime);
-
-    return date.join(' ');  
-  };
 
 
   $scope.searchAddress = function () {
@@ -70,7 +48,7 @@ angular.module('creatingEvent', ['pug.services'])
       $scope.showStartTime = true;
       $scope.createdEvent.startTime = today;
       var space = ' ';
-      var displayT = format(today);
+      var displayT = timeFormatService.formatTime(today);
       $scope.displayStartTime = space + ' is ' + displayT;
     }
   }
@@ -89,7 +67,7 @@ angular.module('creatingEvent', ['pug.services'])
       $scope.showEndTime = true;
       $scope.createdEvent.endTime = today;
       var space = ' ';
-      var displayT = format(today);
+      var displayT = timeFormatService.formatTime(today);
       $scope.displayEndTime = space + ' is ' + displayT;
     }
   }
