@@ -1,5 +1,5 @@
 angular.module('creatingEvent', [])
-.controller('creatingEventCtrl', function (EventService, $scope, $http, $location, $window, $state, timeFormatService) {
+.controller('creatingEventController', function (EventService, $scope, $http, $location, $window, $state, timeFormatService) {
   $scope.createdEvent = {};
   $scope.showStartTime = false;
   $scope.showEndTime = false;

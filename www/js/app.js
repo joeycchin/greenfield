@@ -24,7 +24,7 @@ angular.module('pug', ['ionic', 'pug.authService', 'pug.auth', 'pug.userEventsSe
       url: '/creatingEvent',
       views: {
         'creating-event-tab' : {
-          controller: 'creatingEventCtrl',
+          controller: 'creatingEventController',
           templateUrl: 'views/creatingEvent.html',
         }
       },
