@@ -1,7 +1,6 @@
 angular.module('creatingEvent', [])
 .controller('creatingEventCtrl', function (EventService, $scope, $http, $location, $window, $state, timeFormatService) {
   $scope.createdEvent = {};
-  $scope.loc = [];
   $scope.showStartTime = false;
   $scope.showEndTime = false;
 
@@ -10,7 +9,10 @@ angular.module('creatingEvent', [])
     .then(function () {
       return EventService.set($scope.createdEvent);
     })
-    .then(function (){ 
+    .then(function (){
+      $scope.createdEvent = {};
+      $scope.showStartTime = false;
+      $scope.showEndTime = false;
       $state.go('tabs.map');
     });
   }
