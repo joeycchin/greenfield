@@ -153,7 +153,6 @@ angular.module('pug.map', ['pug.timeFormatService'])
 
   $scope.$on('$ionicView.beforeEnter', function(){
     var latLong = EventService.get();
-    console.log(latLong);
 
     if ($scope.map && latLong) {
       $scope.map.setCenter(latLong);
