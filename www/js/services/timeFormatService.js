@@ -16,9 +16,11 @@ angular.module('pug.timeFormatService', [])
     if(hours > 12){
       hours-=12;
       append = 'PM';
-    } else if(hours === 0) { 
+    } else if (hours === 0) { 
       hours = 12;
       append = 'AM';
+    } else if (hours===12) {
+      append = 'PM';
     } else {
       append = 'AM';
     }
