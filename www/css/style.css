@@ -15,10 +15,23 @@
 .userEventsButtons{
 	color : red;
 	float :right;
+	background-color: white;
 }
 
-.eventInfo{
+.eventType{
+  font-size: 130%;
+}
 
+.eventSkillLevel{
+  font-size: 130%;
+}
+
+.eventStartTime{
+  font-size: 90%;	
+}
+
+.eventLocation{
+  font-size: 80%;
 }
 
 .important{
