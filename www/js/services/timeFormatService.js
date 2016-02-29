@@ -1,9 +1,8 @@
 angular.module('pug.timeFormatService', [])
 
 .factory('timeFormatService', function(){
-  
 
-  function formatTime(startTime){
+  var formatTime = function(startTime){
 
     var start = new Date(startTime);
     var date = start.toString().split(' ').slice(0,3);
@@ -29,10 +28,12 @@ angular.module('pug.timeFormatService', [])
     date.push(formattedTime);
 
     return date.join(' ');
-  }
+
+  };
 
 
   return {
     formatTime : formatTime
   };
+
 });

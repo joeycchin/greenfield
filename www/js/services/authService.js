@@ -1,5 +1,7 @@
 angular.module('pug.authService', [])
+
 .factory('AuthService', function($http, $location, $window) {
+
   var login = function(user) {
     return  $http({
       method: 'POST',
@@ -30,11 +32,12 @@ angular.module('pug.authService', [])
     $window.localStorage.removeItem('com.pug');
     $location.path('/intro');
   };
-  // add functions here to return
+
   return {
     login: login,
     signup: signup,
     isAuth: isAuth,
     logout: logout
   };
+
 });
