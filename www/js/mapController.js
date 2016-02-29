@@ -6,7 +6,7 @@ angular.module('pug.map', ['pug.timeFormatService'])
 
   var createMap = function(callback) {
     $cordovaGeolocation.getCurrentPosition(options).then(function(position){
-      var loc = EventService.get() || [position.coords.latitude, position.coords.longitude];
+      var loc = [position.coords.latitude, position.coords.longitude];
       var centerLatLng = new google.maps.LatLng(loc[0], loc[1]);
 
       var mapOptions = {
@@ -38,13 +38,12 @@ angular.module('pug.map', ['pug.timeFormatService'])
     .then(function (events) {
       $scope.events = events;
 
-    var marker;
+      var marker;
 
-    for (var i = 0; i < $scope.events.length; i++) {
-      var latLng = new google.maps.LatLng($scope.events[i].latitude, $scope.events[i].longitude);
-      addMarker(latLng, $scope.events[i]);
-    }
-
+      for (var i = 0; i < $scope.events.length; i++) {
+        var latLng = new google.maps.LatLng($scope.events[i].latitude, $scope.events[i].longitude);
+        addMarker(latLng, $scope.events[i]);
+      }
     });
   };
 
@@ -153,6 +152,15 @@ angular.module('pug.map', ['pug.timeFormatService'])
   });
 
   $scope.$on('$ionicView.beforeEnter', function(){
+    var latLong = EventService.get();
+    console.log(latLong);
+
+    if ($scope.map && latLong) {
+      $scope.map.setCenter(latLong);
+
+      EventService.setEmpty();
+    }
+
     updateMap();
   });
 });

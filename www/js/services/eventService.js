@@ -1,5 +1,7 @@
 angular.module('pug.eventService', [])
 .factory('EventService', function($http, $location, $window) {
+  var eventLatLng;
+
   var addEvent = function (createdEvent) {
     return $http({
       method: 'POST',
@@ -8,10 +10,12 @@ angular.module('pug.eventService', [])
     })
   }
 
-  var eventLatLng;
-
   var set = function (createdEvent) {
-    eventLatLng = [createdEvent.latitude, createdEvent.longitude];
+    eventLatLng = {lat: createdEvent.latitude, lng: createdEvent.longitude};
+  }
+
+  var setEmpty = function () {
+    eventLatLng = undefined;
   }
 
   var get = function () {
@@ -21,6 +25,7 @@ angular.module('pug.eventService', [])
   return {
     addEvent: addEvent,
     set: set,
-    get: get
+    get: get,
+    setEmpty: setEmpty
   }
 });
