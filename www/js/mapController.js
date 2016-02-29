@@ -4,10 +4,7 @@ angular.module('pug.map', [])
   var markers = [];
   $scope.events;
 
-  userEventsService.getAllEvents()
-  .then(function (events) {
-    $scope.events = events;
-
+  var createMap = function(callback) {
     $cordovaGeolocation.getCurrentPosition(options).then(function(position){
       var loc = Auth.get() || [position.coords.latitude, position.coords.longitude];
       var centerLatLng = new google.maps.LatLng(loc[0], loc[1]);
@@ -23,16 +20,27 @@ angular.module('pug.map', [])
 
       // Create new map with mapOptions specified
       $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      var marker;
+      callback();
 
-      for (var i = 0; i < $scope.events.length; i++) {
-        var latLng = new google.maps.LatLng($scope.events[i].latitude, $scope.events[i].longitude);
-        addMarker(latLng, $scope.events[i]);
-      }
     }, function(error){
       console.log("Could not get location");
     });
-  });
+  };
+
+  var updateMap = function() {
+    userEventsService.getAllEvents()
+    .then(function (events) {
+      $scope.events = events;
+
+    var marker;
+
+    for (var i = 0; i < $scope.events.length; i++) {
+      var latLng = new google.maps.LatLng($scope.events[i].latitude, $scope.events[i].longitude);
+      addMarker(latLng, $scope.events[i]);
+    }
+
+    });
+  };
 
   // Adds a marker to the map and push to the array.
   function addMarker(latLng, event) {
@@ -86,6 +94,11 @@ angular.module('pug.map', [])
                       $ionicPopup.alert({
                         title: 'Event added!'
                       });
+                      // Close marker content box
+                      infoWindow.close();
+                      
+                      // Update map
+                      updateMap();
                     });  
 
                   // Popup displays if user tries to check into event more than once
@@ -127,6 +140,11 @@ angular.module('pug.map', [])
       }
     }
   };
+
+  // Initialize map
+  createMap(function() {
+    updateMap();
+  });
 });
 
 
