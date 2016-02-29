@@ -12,10 +12,12 @@
     height: 100%;
 }
 
-.userEventsButtons{
+.userEventsButtons {
+  background-color: white;
 	color : red;
-	float :right;
-	background-color: white;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .eventType{
