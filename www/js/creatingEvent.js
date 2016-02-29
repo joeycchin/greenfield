@@ -16,6 +16,29 @@ angular.module('creatingEvent', ['pug.services'])
     })
   }
 
+  function format(startTime){
+    var start = new Date(startTime);
+    var date = start.toString().split(' ').slice(0,3);
+    var time = start.toString().split(' ')[4];
+    var formattedTime = time.split(':');
+    var hours = Number(formattedTime[0]);
+    var minutes = formattedTime[1];
+    var append;
+
+    if(hours > 12){
+      hours-=12;
+      append = 'PM';
+    } else {
+      append = 'AM';
+    }
+
+    formattedTime = [hours, minutes].join(':') + ' ' + append;
+    date.push(formattedTime);
+
+    return date.join(' ');  
+  };
+
+
   $scope.searchAddress = function () {
 
     var addressInput = $scope.createdEvent.location;
@@ -38,16 +61,17 @@ angular.module('creatingEvent', ['pug.services'])
       console.log('Time not selected');
     } else {
       var today = new Date();
+      var timeZoneDiff = today.getTimezoneOffset() / 60;
       var hour = parseInt(val/3600);
       var minute = (val - hour*3600) / 60;
-      today.setUTCHours(hour);
+      today.setUTCHours(hour + timeZoneDiff);
       today.setUTCMinutes(minute);
       today.setUTCSeconds(0);
       $scope.showStartTime = true;
       $scope.createdEvent.startTime = today;
       var space = ' ';
-      $scope.displayStartTime = space + ' is set to ' + today.toISOString().slice(11,16);
-
+      var displayT = format(today);
+      $scope.displayStartTime = space + ' is ' + displayT;
     }
   }
 
@@ -56,15 +80,17 @@ angular.module('creatingEvent', ['pug.services'])
       console.log('Time not selected');
     } else {
       var today = new Date();
+      var timeZoneDiff = today.getTimezoneOffset() / 60;
       var hour = parseInt(val/3600);
       var minute = (val - hour*3600) / 60;
-      today.setUTCHours(hour);
+      today.setUTCHours(hour + timeZoneDiff);
       today.setUTCMinutes(minute);
       today.setUTCSeconds(0);
       $scope.showEndTime = true;
       $scope.createdEvent.endTime = today;
       var space = ' ';
-      $scope.displayEndTime = space + ' is set to ' + today.toISOString().slice(11,16);
+      var displayT = format(today);
+      $scope.displayEndTime = space + ' is ' + displayT;
     }
   }
 
