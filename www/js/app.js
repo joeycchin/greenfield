@@ -1,4 +1,4 @@
-angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.userEventsService', 'pug.userEventsController', 'pug.map', 'creatingEvent', 'ngCordova', 'ionic-timepicker', 'pug.timeFormatService'])
+angular.module('pug', ['ionic', 'pug.authService', 'pug.auth', 'pug.userEventsService', 'pug.userEventsController', 'pug.map', 'creatingEvent', 'ngCordova', 'ionic-timepicker', 'pug.timeFormatService', 'pug.eventService'])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
     .state('login', {
@@ -69,7 +69,7 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.userEventsServi
   };
   return attach;
 })
-.run(function ($rootScope, $state, Auth, $ionicPlatform) {
+.run(function ($rootScope, $state, AuthService, $ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -87,7 +87,7 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.userEventsServi
   });
   // Check token in localStorage whenever angular state changes
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-    if (toState.authenticate && !Auth.isAuth()){
+    if (toState.authenticate && !AuthService.isAuth()){
       // User isn’t authenticated
       $state.transitionTo("intro");
       event.preventDefault(); 

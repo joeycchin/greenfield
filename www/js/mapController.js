@@ -1,12 +1,12 @@
 angular.module('pug.map', ['pug.timeFormatService'])
-.controller('MapController', function($scope, $ionicLoading, $compile, $cordovaGeolocation, Auth, userEventsService, $ionicPopup, timeFormatService) {
+.controller('MapController', function ($scope, $compile, $cordovaGeolocation, EventService, userEventsService, $ionicPopup, timeFormatService) {
   var options = {timeout: 10000, enableHighAccuracy: true};
   var markers = [];
   $scope.events;
 
   var createMap = function(callback) {
     $cordovaGeolocation.getCurrentPosition(options).then(function(position){
-      var loc = Auth.get() || [position.coords.latitude, position.coords.longitude];
+      var loc = EventService.get() || [position.coords.latitude, position.coords.longitude];
       var centerLatLng = new google.maps.LatLng(loc[0], loc[1]);
 
       var mapOptions = {

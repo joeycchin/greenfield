@@ -1,19 +1,18 @@
-angular.module('creatingEvent', ['pug.services', 'pug.timeFormatService'])
-.controller('creatingEventCtrl', function (Auth, $scope, $http, $location, $window, $state, $ionicHistory, timeFormatService) {
+angular.module('creatingEvent', [])
+.controller('creatingEventCtrl', function (EventService, $scope, $http, $location, $window, $state, timeFormatService) {
   $scope.createdEvent = {};
   $scope.loc = [];
   $scope.showStartTime = false;
   $scope.showEndTime = false;
 
   $scope.addEvent = function () {
-    Auth.addEvent($scope.createdEvent)
+    EventService.addEvent($scope.createdEvent)
     .then(function () {
-      Auth.set($scope.createdEvent);
-      $ionicHistory.clearCache()
-      .then(function (){ 
-        $state.go('tabs.map', {}, {reload: true})
-      }) 
+      return EventService.set($scope.createdEvent);
     })
+    .then(function (){ 
+      $state.go('tabs.map', {}, {reload: true});
+    });
   }
 
 
