@@ -1,23 +1,4 @@
-angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
-
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
-})
-
+angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.userEventsService', 'pug.userEventsController', 'pug.map', 'creatingEvent', 'ngCordova', 'ionic-timepicker'])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
     .state('login', {
@@ -36,6 +17,7 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
     })
     .state('creatingEvent', {
       url: '/creatingEvent',
+      controller: 'creatingEventCtrl',
       templateUrl: 'views/creatingEvent.html',
       authenticate: true
     })
@@ -44,7 +26,13 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
       controller: 'MapController',
       templateUrl: 'views/map.html',
       authenticate: true
+    })
+    .state('userEvents', {
+      url : '/userEvents',
+      controller : 'userEventsController',
+      templateUrl : 'views/userEvents.html'
     });
+
   $urlRouterProvider.otherwise('/intro');
 
   $httpProvider.interceptors.push('AttachTokens');
@@ -54,7 +42,7 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
   // Attaches token to any request to server so that server can validate requests 
   var attach = {
     request: function (object) {
-      var jwt = $window.localStorage.getItem('com.shortly');
+      var jwt = $window.localStorage.getItem('com.pug');
       if (jwt) {
         object.headers['x-access-token'] = jwt;
       }
@@ -64,8 +52,22 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.map'])
   };
   return attach;
 })
+.run(function ($rootScope, $state, Auth, $ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
-.run(function ($rootScope, $state, Auth) {
+      // Don't remove this line unless you know what you are doing. It stops the viewport
+      // from snapping when text inputs are focused. Ionic handles this internally for
+      // a much nicer keyboard experience.
+      cordova.plugins.Keyboard.disableScroll(true);
+    }
+    if(window.StatusBar) {
+      StatusBar.styleDefault();
+    }
+  });
   // Check token in localStorage whenever angular state changes
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
     if (toState.authenticate && !Auth.isAuth()){

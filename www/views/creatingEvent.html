@@ -6,21 +6,38 @@
   <ion-content class="padding">
     <div class="list list-inset">
       <label class="item item-input">
-        <input type="text" placeholder="type of sport" ng-model="createEvent.type">
+        <input type="text" placeholder="Type of Sport" ng-model="createdEvent.type">
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="address" ng-model="createEvent.location">
+        <input type="text" placeholder="Address" ng-model="createdEvent.location">
       </label>
+
       <label class="item item-input">
-        <input type="text" placeholder="Starting time" ng-model="createEvent.startTime">
+      <div>
+      <ionic-timepicker input-obj="startTime">
+        <button class="button button-clear overflowShow" style='font-size: 14px; min-height:30px; height: 34px; padding: 0 0; margin: 0 0; line-height: 16px; padding-top: 2px;'>
+          <standard-time-meridian etime='timePickerObject.inputEpochTime'>Starting Time</standard-time-meridian><span ng-show='showStartTime'> {{displayStartTime}}</span>
+        </button>
+      </ionic-timepicker>
+      </div>
       </label>
+
       <label class="item item-input">
-        <input type="password" placeholder="Ending time" ng-model="createEvent.endTime">
+
+      <div>
+      <ionic-timepicker input-obj="timePickerObject">
+        <button class="button button-clear overflowShow" style='font-size: 14px; min-height:30px; height: 34px; padding: 0 0; margin: 0 0; line-height: 16px; padding-top: 2px;'>
+          <standard-time-meridian etime='timePickerObject.inputEpochTime'>Ending Time</standard-time-meridian><span ng-show='showEndTime'> {{displayEndTime}}</span>
+        </button>
+      </ionic-timepicker>
+      </div>
       </label>
+
       <label class="item item-input">
-        <input type="password" placeholder="Skill level" ng-model="createEvent.skillLevel">
+        <input type="text" placeholder="Skill level" ng-model="createEvent.skillLevel">
       </label>
     </div>
-    <button class="button button-block button-calm" ng-click="addEvent()">Create this event</button>
+
+    <button class="button button-block button-calm" ng-click="searchAddress()">Create this event</button>
   </ion-content>
 </ion-view>

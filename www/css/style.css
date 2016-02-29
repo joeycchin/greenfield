@@ -1,4 +1,8 @@
 /* Empty. Add your own CSS if you like */
+.map-container {
+  bottom: 50px;
+}
+
 .scroll {
     height: 100%;
 }
@@ -6,4 +10,35 @@
 #map {
     width: 100%;
     height: 100%;
+}
+
+.userEventsButtons{
+	color : red;
+	float :right;
+	background-color: white;
+}
+
+.eventType{
+  font-size: 130%;
+}
+
+.eventSkillLevel{
+  font-size: 130%;
+}
+
+.eventStartTime{
+  font-size: 90%;	
+}
+
+.eventLocation{
+  font-size: 80%;
+}
+
+.important{
+	font-weight : bold;
+}
+
+.notImportant{
+	font-size: 70%;
+	color : blue;
 }
