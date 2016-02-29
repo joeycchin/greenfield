@@ -28,6 +28,12 @@ angular.module('pug.map', ['pug.timeFormatService'])
   };
 
   var updateMap = function() {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+
+    markers = [];
+
     userEventsService.getAllEvents()
     .then(function (events) {
       $scope.events = events;
@@ -143,6 +149,10 @@ angular.module('pug.map', ['pug.timeFormatService'])
 
   // Initialize map
   createMap(function() {
+    updateMap();
+  });
+
+  $scope.$on('$ionicView.beforeEnter', function(){
     updateMap();
   });
 });
