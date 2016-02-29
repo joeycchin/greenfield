@@ -57,33 +57,59 @@ angular.module('pug.map', [])
           var eventStartTimeArr = ["<div class='notImportant'>", formattedDateTime ,"</div>"].join('');
           var locationArr = ["<div class='notImportant'>", event.location ,"</div>"].join('');
           var skillLevelArr = ["<div class='notImportant'>", event.skillLevel ,"</div>"].join('');
-          var addEvent = ['<span id='+ event._id + '>Add Event</span>'].join('');
+          var allInfoArr;
 
-          var allInfoArr = [eventTypeArr, playerCountArr, eventStartTimeArr, locationArr, skillLevelArr, addEvent].join('');
-          infoWindow.setContent("<div class='container'>" + allInfoArr + "</div>");
-          infoWindow.open($scope.map, marker);
+          // Find events for current user
+          userEventsService.getUserEventIds()
+          .then(function(eventIds) {
+            var eventId = event._id;
 
-          var contentBox = document.getElementById(event._id);
-          contentBox.addEventListener("click", function() {
-            userEventsService.getUserEventIds()
-            .then(function(eventIds) {
-              var eventId = event._id;
+            // If user not checked into event
+            if (!eventIds.includes(eventId)) {
 
-              if (!eventIds.includes(eventId)) {
-                userEventsService.checkInUser(eventId)
-                .then(function() {
-                  $ionicPopup.alert({
-                    title: 'Event added!'
-                  });
-                });  
-              } else {
-                $ionicPopup.alert({
-                  title: 'Event already added!'
+              var addEvent = ['<span id='+ event._id + '>Add Event</span>'].join('');
+              allInfoArr = [eventTypeArr, playerCountArr, eventStartTimeArr, locationArr, skillLevelArr, addEvent].join('');
+              infoWindow.setContent("<div class='container'>" + allInfoArr + "</div>");
+              infoWindow.open($scope.map, marker);
+
+              var contentBox = document.getElementById(event._id);
+              contentBox.addEventListener("click", function() {
+
+                // Check in user and return popup when complete
+                userEventsService.getUserEventIds()
+                .then(function(eventIds) {
+                  var eventId = event._id;
+
+                  if (!eventIds.includes(eventId)) {
+                    userEventsService.checkInUser(eventId)
+                    .then(function() {
+                      $ionicPopup.alert({
+                        title: 'Event added!'
+                      });
+                    });  
+
+                  // Popup displays if user tries to check into event more than once
+                  } else {
+                    $ionicPopup.alert({
+                      title: 'Event already added!'
+                    });
+                  }
+
                 });
-              }
 
-            });
-          }, false);
+              }, false);
+
+            // If user is already checked into event
+            } else {
+
+              var checkedIn = ['<span id='+ event._id + '>Checked in!</span>'].join('');
+              allInfoArr = [eventTypeArr, playerCountArr, eventStartTimeArr, locationArr, skillLevelArr, checkedIn].join('');
+              infoWindow.setContent("<div class='container'>" + allInfoArr + "</div>");
+              infoWindow.open($scope.map, marker);
+            }
+
+          });
+
         };
     })(marker));
 
