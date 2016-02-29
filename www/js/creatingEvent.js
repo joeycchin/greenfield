@@ -11,7 +11,7 @@ angular.module('creatingEvent', [])
       return EventService.set($scope.createdEvent);
     })
     .then(function (){ 
-      $state.go('tabs.map', {}, {reload: true});
+      $state.go('tabs.map');
     });
   }
 
