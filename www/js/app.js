@@ -15,22 +15,39 @@ angular.module('pug', ['ionic', 'pug.services', 'pug.auth', 'pug.userEventsServi
       url: '/intro',
       templateUrl: 'views/intro.html'
     })
-    .state('creatingEvent', {
+    .state('tabs', {
+      url: '/main',
+      templateUrl: 'views/tabs-view.html',
+      controller: 'AuthController'
+    })
+    .state('tabs.creatingEvent', {
       url: '/creatingEvent',
-      controller: 'creatingEventCtrl',
-      templateUrl: 'views/creatingEvent.html',
+      views: {
+        'creating-event-tab' : {
+          controller: 'creatingEventCtrl',
+          templateUrl: 'views/creatingEvent.html',
+        }
+      },
       authenticate: true
     })
-    .state('map', {
+    .state('tabs.map', {
       url: '/map',
-      controller: 'MapController',
-      templateUrl: 'views/map.html',
+      views: {
+        'map-tab' : {
+          controller: 'MapController',
+          templateUrl: 'views/map.html',
+        }
+      },
       authenticate: true
     })
-    .state('userEvents', {
+    .state('tabs.userEvents', {
       url : '/userEvents',
-      controller : 'userEventsController',
-      templateUrl : 'views/userEvents.html'
+      views: {
+        'user-events-tab' : {
+          controller : 'userEventsController',
+          templateUrl : 'views/userEvents.html'
+        }
+      }
     });
 
   $urlRouterProvider.otherwise('/intro');
