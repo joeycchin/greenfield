@@ -1,5 +1,5 @@
 angular.module('pug.userEventsController', ['pug.userEventsService', 'pug.timeFormatService'])
-.controller('userEventsController', function($scope, userEventsService, $ionicPopup, timeFormatService){
+.controller('userEventsController', function ($scope, userEventsService, $ionicPopup, timeFormatService){
   $scope.userEvents = [];
 
   userEventsService.getUserEvents()

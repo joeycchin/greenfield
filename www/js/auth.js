@@ -1,13 +1,13 @@
 angular.module('pug.auth', [])
-.controller('AuthController', function ($scope, $window, $location, Auth, $state, $ionicPopup) {
+.controller('AuthController', function ($scope, $window, $location, AuthService, $state, $ionicPopup) {
   $scope.user = {};
 
   $scope.login = function () {
-    Auth.login($scope.user)
+    AuthService.login($scope.user)
     .then(function (token) {
       $window.localStorage.setItem('com.pug', token);
       //should redirect to 'map' route once set up
-      $state.go('tabs');
+      $state.go('tabs', {}, {reload: true});
     })
     .catch(function (error) {
       console.error(error);
@@ -18,11 +18,11 @@ angular.module('pug.auth', [])
   };
 
   $scope.signup = function () {
-    Auth.signup($scope.user)
+    AuthService.signup($scope.user)
     .then(function (token) {
       $window.localStorage.setItem('com.pug', token);
       //should redirect to 'map' route once set up
-      $state.go('tabs');
+      $state.go('tabs', {}, {reload: true});
     })
     .catch(function (error) {
       console.error(error);
@@ -39,6 +39,6 @@ angular.module('pug.auth', [])
   };
 
   $scope.logout = function() {
-    Auth.logout();
+    AuthService.logout();
   };
 });
