@@ -1,5 +1,5 @@
 angular.module('creatingEvent', [])
-.controller('creatingEventController', function (EventService, $scope, $http, $location, $window, $state, timeFormatService) {
+.controller('creatingEventController', function (EventService, $scope, $state, timeFormatService) {
   $scope.createdEvent = {};
   $scope.showStartTime = false;
   $scope.showEndTime = false;
@@ -10,16 +10,15 @@ angular.module('creatingEvent', [])
       return EventService.set($scope.createdEvent);
     })
     .then(function (){
+      // Reset scope variables and redirect to map after submitting form
       $scope.createdEvent = {};
       $scope.showStartTime = false;
       $scope.showEndTime = false;
       $state.go('tabs.map');
     });
-  }
-
+  };
 
   $scope.searchAddress = function () {
-
     var addressInput = $scope.createdEvent.location;
     var geocoder = new google.maps.Geocoder();
 
@@ -28,13 +27,11 @@ angular.module('creatingEvent', [])
         $scope.createdEvent.latitude=results[0].geometry.location.lat();
         $scope.createdEvent.longitude=results[0].geometry.location.lng();
         $scope.addEvent();
-
       }
     });
-  }
+  };
 
   function startTimePickerCallback(val) {
-    console.log(val);
 
     if (typeof (val) === 'undefined') {
       console.log('Time not selected');
