@@ -48,3 +48,8 @@
   margin-top: 10px;
   background-color: #DCDCDC;
 }
+
+.bgd-img {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
