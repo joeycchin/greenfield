@@ -29,12 +29,14 @@ angular.module('pug.userEventsService', [])
 
         getEvent(eventIds[i])
         .then(function(resp){
-          events.push(resp); 
+          events.push(resp);
         })
         .catch(function(err){
           console.error(err);
         });
+
       }
+
       return events;
     });
   };
@@ -53,7 +55,7 @@ angular.module('pug.userEventsService', [])
     return $http({
       method: 'POST',
       url: 'http://127.0.0.1:3000/api/events/users/1',
-      data : {eventId : eventId}
+      data : { eventId : eventId }
     });
   };
  
@@ -61,8 +63,8 @@ angular.module('pug.userEventsService', [])
     return $http({
       method : 'DELETE',
       url : 'http://127.0.0.1:3000/api/events/users/1',
-      data : {eventId : eventId},
-      headers: {"Content-Type": "application/json;charset=utf-8"}
+      data : { eventId : eventId },
+      headers: { "Content-Type" : "application/json;charset=utf-8" }
     });
   };
 
@@ -74,4 +76,5 @@ angular.module('pug.userEventsService', [])
     checkInUser: checkInUser,
     removeUserEvent : removeUserEvent
   };
+
 });
