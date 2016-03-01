@@ -1,13 +1,15 @@
 angular.module('pug.auth', [])
-.controller('AuthController', function ($scope, $window, $location, AuthService, $state, $ionicPopup) {
+.controller('AuthController', function ($scope, $window, AuthService, $state, $ionicPopup) {
   $scope.user = {};
 
   $scope.login = function () {
     AuthService.login($scope.user)
     .then(function (token) {
+      // Attach authentication token
       $window.localStorage.setItem('com.pug', token);
-      //should redirect to 'map' route once set up
-      $state.go('tabs', {}, {reload: true});
+      // Reset scope variables and redirect to map after submitting form
+      $scope.user = {};
+      $state.go('tabs.map', {}, {reload: true});
     })
     .catch(function (error) {
       console.error(error);
@@ -20,9 +22,11 @@ angular.module('pug.auth', [])
   $scope.signup = function () {
     AuthService.signup($scope.user)
     .then(function (token) {
+      // Attach authentication token
       $window.localStorage.setItem('com.pug', token);
-      //should redirect to 'map' route once set up
-      $state.go('tabs', {}, {reload: true});
+      // Reset scope variables and redirect to map after submitting form
+      $scope.user = {};
+      $state.go('tabs.map', {}, {reload: true});
     })
     .catch(function (error) {
       console.error(error);

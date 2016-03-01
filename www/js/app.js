@@ -50,7 +50,7 @@ angular.module('pug', ['ionic', 'pug.authService', 'pug.auth', 'pug.userEventsSe
       }
     });
 
-  $urlRouterProvider.otherwise('/intro');
+  $urlRouterProvider.otherwise('/main/map');
 
   $httpProvider.interceptors.push('AttachTokens');
 })

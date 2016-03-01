@@ -44,3 +44,14 @@
 	font-size: 70%;
 	color : blue;
 }
+.pug-photo {
+  display:block;
+  margin: 0 auto;
+}
+.button-positive {
+  margin-top: 30px;
+}
+.button-grey {
+  margin-top: 10px;
+  background-color: #DCDCDC;
+}
